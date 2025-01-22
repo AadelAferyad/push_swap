@@ -13,6 +13,48 @@
 #include "main.h"
 #include <stdio.h>
 
+int	stack_size(stack *stk)
+{
+	int	i;
+
+	i = 0;
+	while (stk)
+	{
+		stk = stk->next;
+		i++;
+	}
+	return (i);
+}
+
+/*
+ * [3] 9 4 1 2 5
+ *
+ * */
+void	indexing_stack(stack *stk)
+{
+	stack	*tmp;
+	stack	*head;
+	stack	*n;
+	int	index;
+
+	index = 0;
+	head = stk;
+	while (stk)
+	{
+		index = 0;
+		n = stk;
+		tmp = head;
+		while (tmp)
+		{
+			if (tmp->data < n->data)
+				index++;
+			tmp = tmp->next;
+		}
+		n->index = index;
+		stk = stk->next;
+	}
+}
+
 void	find_head(stack **stk)
 {
 	while ((*stk)->prev)
@@ -71,19 +113,20 @@ int	main(int ac, char **av)
 	stack	*stack_b;
 
 	stack_a = create_stack(ac, av);
+	stack_b = NULL;
+	indexing_stack(stack_a);
 	while (stack_a)
 	{
-		printf("<-- %d -->", stack_a->data);
+		printf("<-- %d [%d] -->", stack_a->data, stack_a->index);
 		if (!stack_a->next)
 			break;
 		stack_a = stack_a->next;
 	}
 	find_head(&stack_a);
 	printf("\n");
-	reverse_rotate_stack(&stack_a);
 	while (stack_a)
 	{
-		printf("<-- %d -->", stack_a->data);
+		printf("<-- %d [%d] -->", stack_a->data, stack_a->index);
 		if (!stack_a->next)
 			break;
 		stack_a = stack_a->next;

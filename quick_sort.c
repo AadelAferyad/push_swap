@@ -11,43 +11,57 @@
 /* ************************************************************************** */
 
 #include "main.h"
-
-
-/*
- * N <--(1)<-->(2)<-->(5)-->N
- * */
-void	swap_nodes(stack *node1, stack *node2)
+int	closest_operation(stack *stk, int node, int stk_size)
 {
-	stack	*tmp;
+	int	i;
 
-	tmp = node1->prev;
-	node1->prev = node2->prev;
-	node2->prev = tmp;
-	tmp = node1->next;
-	node1->next = node2->next;
-	node2->next = tmp;
-	tmp = node1;
-	node1 = node2;
-	node2 = tmp;
-}
-
-stack	*get_last_node(stack *stk)
-{
-	while (stk->next)
-		stk = stk->next;
-	return (stk);
-}
-int	partition(stack *stk)
-{
-	stack	*pivot;
-	stack	*i;
-	stack	*j;
-
-	pivot = stk;
-	i = stk->next;
-	j = get_last_node(stk);
-	while (1)
+	i = 0;
+	if (stk->index == node)
+		return (0);
+	if (stk->next->index == node)
+		return (1);
+	while (stk)
 	{
-		while (i->data )
+		if (stk->index == node)
+			break ;
+		stk = stk->next;
+		i++;
+	}
+	if (i < stk_size / 2)
+		return (2);
+	return (3);
+}
+void	sorted_stack_a(stack **stack_a, stack **stack_b)
+{
+	while (*stack_b)
+	{
+		push_stack(stack_b, stack_a, PA);
 	}
 }
+void	sort_stack(stack **stack_a, stack **stack_b)
+{
+	int	size;
+	int	index;
+	int	op;
+
+	size = stack_size(*stack_a);
+	index = 0;
+	while (*stack_a)
+	{
+		ft_puts("here ?\n");
+		op = closest_operation(*stack_a, index, size);
+		if (op == 0)
+		{
+			push_stack(stack_a, stack_b, PB);
+			index++;
+		}
+		if (op == 1)
+			swap_stack(stack_a, SA);
+		else if (op == 2)
+			rotate_stack(stack_a, RA);
+		else if (op == 3)
+			reverse_rotate_stack(stack_a, RRA);
+	}
+	sorted_stack_a(stack_a, stack_b);
+}
+

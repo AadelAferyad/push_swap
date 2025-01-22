@@ -12,7 +12,8 @@
 
 #include "main.h"
 
-void	swap_stack(stack **stk)
+
+void	swap_stack(stack **stk, char *str)
 {
 	stack	*head;
 	stack	*tmp;
@@ -26,14 +27,20 @@ void	swap_stack(stack **stk)
 	tmp->next = head;
 	tmp->prev = NULL;
 	*stk = tmp;
+	ft_puts(str);
 }
 
-void	push_stack(stack **stack_a, stack **stack_b)
+void	push_stack(stack **stack_a, stack **stack_b, char *str)
 {
 	stack	*tmp;
 	stack	*head;
 
-	if (!(*stack_b))
+	if (!(*stack_b) && ft_strncmp("pa", str, 2))
+	{
+		*stack_b = *stack_a;
+		return ;
+	}
+	else if (!(*stack_b))
 		return ;
 
 	head = *stack_b;
@@ -49,9 +56,10 @@ void	push_stack(stack **stack_a, stack **stack_b)
 	}
 	(*stack_a)->prev = head;
 	*stack_a = head;
+	ft_puts(str);
 }
 
-void	rotate_stack(stack **stk)
+void	rotate_stack(stack **stk, char *str)
 {
 	stack	*tmp;
 	stack	*head;
@@ -69,10 +77,11 @@ void	rotate_stack(stack **stk)
 	
 	tmp->prev = NULL;
 	*stk = tmp;
+	ft_puts(str);	
 }
 
 
-void	reverse_rotate_stack(stack **stk)
+void	reverse_rotate_stack(stack **stk, char *str)
 {
 	stack	*head;
 	stack	*tmp;
@@ -91,5 +100,7 @@ void	reverse_rotate_stack(stack **stk)
 
 	(*stk)->prev = head;
 	*stk = head;
+	ft_puts(str);	
+
 }
 
