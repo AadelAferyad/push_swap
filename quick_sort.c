@@ -11,14 +11,17 @@
 /* ************************************************************************** */
 
 #include "main.h"
+#include <stdio.h>
 int	closest_operation(stack *stk, int node, int stk_size)
 {
 	int	i;
 
 	i = 0;
+	if (!stk)
+		return (10);
 	if (stk->index == node)
 		return (0);
-	if (stk->next->index == node)
+	if (stk->next && stk->next->index == node)
 		return (1);
 	while (stk)
 	{
@@ -33,6 +36,7 @@ int	closest_operation(stack *stk, int node, int stk_size)
 }
 void	sorted_stack_a(stack **stack_a, stack **stack_b)
 {
+
 	while (*stack_b)
 	{
 		push_stack(stack_b, stack_a, PA);
@@ -48,7 +52,8 @@ void	sort_stack(stack **stack_a, stack **stack_b)
 	index = 0;
 	while (*stack_a)
 	{
-		ft_puts("here ?\n");
+		if (!(*stack_a))
+			break ;
 		op = closest_operation(*stack_a, index, size);
 		if (op == 0)
 		{

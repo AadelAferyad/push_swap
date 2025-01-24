@@ -33,29 +33,29 @@ void	swap_stack(stack **stk, char *str)
 void	push_stack(stack **stack_a, stack **stack_b, char *str)
 {
 	stack	*tmp;
-	stack	*head;
 
-	if (!(*stack_b) && ft_strncmp("pa", str, 2))
+	if (!(*stack_b))
 	{
-		*stack_b = *stack_a;
+		tmp = *stack_a;
+		*stack_a = (*stack_a)->next;
+		*stack_b = tmp;
+		tmp->next = NULL;
+		ft_puts(str);
 		return ;
 	}
-	else if (!(*stack_b))
+	if (!(*stack_b) || !(*stack_a))
 		return ;
 
-	head = *stack_b;
-	tmp = head->next;
+	tmp = *stack_a;
 
-	head->next = *stack_a;
-	head->prev = NULL;
+	*stack_a = (*stack_a)->next;
+	if (*stack_a)
+		(*stack_a)->prev = NULL;
+
+	tmp->next = *stack_b;
+	tmp->prev = NULL;
+
 	*stack_b = tmp;
-	if (!(*stack_a))
-	{
-		*stack_a = head;
-		return ;
-	}
-	(*stack_a)->prev = head;
-	*stack_a = head;
 	ft_puts(str);
 }
 

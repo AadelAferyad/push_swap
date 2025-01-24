@@ -123,7 +123,9 @@ int	main(int ac, char **av)
 		stack_a = stack_a->next;
 	}
 	find_head(&stack_a);
+	sort_stack(&stack_a, &stack_b);
 	printf("\n");
+	/*find_head(&stack_a);*/
 	while (stack_a)
 	{
 		printf("<-- %d [%d] -->", stack_a->data, stack_a->index);
