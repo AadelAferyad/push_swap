@@ -12,6 +12,7 @@
 
 #include "main.h"
 #include <stdio.h>
+
 int	closest_operation(stack *stk, int node, int stk_size)
 {
 	int	i;
@@ -46,27 +47,23 @@ void	sort_stack(stack **stack_a, stack **stack_b)
 {
 	int	size;
 	int	index;
-	int	op;
+	int	range;
+	int	i;
+	int	j;
 
 	size = stack_size(*stack_a);
+	range = size/5;
+	i = 0;
 	index = 0;
-	while (*stack_a)
+	j = 0;
+	while (i < 5)
 	{
-		if (!(*stack_a))
-			break ;
-		op = closest_operation(*stack_a, index, size);
-		if (op == 0)
+		while (j < range)
 		{
-			push_stack(stack_a, stack_b, PB);
-			index++;
+			if ((*stack_a)->index <)
 		}
-		if (op == 1)
-			swap_stack(stack_a, SA);
-		else if (op == 2)
-			rotate_stack(stack_a, RA);
-		else if (op == 3)
-			reverse_rotate_stack(stack_a, RRA);
+		i++;
 	}
-	sorted_stack_a(stack_a, stack_b);
+	index = 0;
 }
 
