@@ -6,12 +6,22 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:02:42 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/01/17 13:05:06 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:01:43 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include <stdio.h>
+
+void	print_stack(stack *stk)
+{
+	while (stk)
+	{
+		printf("(%d)-->", stk->data);
+		stk = stk->next;
+	}
+	printf("\n");
+}
 
 int	stack_size(stack *stk)
 {
@@ -112,6 +122,11 @@ int	main(int ac, char **av)
 	stack	*stack_a;
 	stack	*stack_b;
 
-	parser(ac, av);
+	stack_b = NULL;
+	stack_a = create_stack(ac, av);
+	indexing_stack(stack_a);
+	print_stack(stack_a);
+	if (stack_a)
+		sort_stack(&stack_a, &stack_b);
 	return (0);
 }

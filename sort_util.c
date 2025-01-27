@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:30:27 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/01/17 13:04:50 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:34:53 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	reverse_rotate_stack(stack **stk, char *str)
 
 	head = *stk;
 
+	if (!head || !head->next)
+		return ;
 	while (head->next)
 		head = head->next;
 
