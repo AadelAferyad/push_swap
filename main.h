@@ -39,9 +39,15 @@ typedef struct stack_list
 {
 	int	data;
 	int	index;
+	int	op;
 	struct stack_list	*prev;
 	struct stack_list	*next;
 } stack;
+
+typedef struct	all_operations
+{
+	int	op;
+} operations;
 
 void	swap_stack(stack **stk, char *str);
 void	find_head(stack **stk);
@@ -51,4 +57,5 @@ void	reverse_rotate_stack(stack **stk, char *str);
 int	stack_size(stack *stk);
 void	sort_stack(stack **stack_a, stack **stack_b);
 void	print_stack(stack *stk);
+void	unset_operation(stack *stk);
 #endif 

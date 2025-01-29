@@ -59,6 +59,9 @@ void	sorted_stack_a(stack **stack_a, stack **stack_b, int size)
 	while (*stack_b)
 	{
 		op = closest_operation(*stack_b, index, size);
+		print_stack(*stack_b);
+		printf("stack a indexx : %d\n", index);
+		print_stack(*stack_a);
 		if (!op)
 		{
 			push_stack(stack_b, stack_a, PA);
@@ -94,41 +97,11 @@ void	optimize_sort(stack **stk, int low, int high, int size)
 void	sort_stack(stack **stack_a, stack **stack_b)
 {
 	int	size;
-	int	range;
-	int	i;
-	int	j;
-	int	low;
-	int	op;
-	int	high;
 
+	push_stack(stack_a, stack_b, PB);
+	push_stack(stack_a, stack_b, PB);
 	size = stack_size(*stack_a);
-	range = 9;
-	low = 0;
-	high = range;
-	i = 0;
-	while (i < size && *stack_a)
+	while (size > 3)
 	{
-		if ((*stack_a)->index >= low && (*stack_a)->index <= high)
-		{
-			push_stack(stack_a, stack_b, PB);
-			low++;
-			high++;
-			i++;
-		}
-		else if ((*stack_a)->index < low)
-		{
-			push_stack(stack_a, stack_b, PB);
-			rotate_stack(stack_b, RB);
-			low++;
-			high++;
-			i++;
-		}
-		else 
-		{
-			/*optimize_sort(stack_a, low, high, size);*/
-			rotate_stack(stack_a, RA);
-		}
 	}
-	print_stack(*stack_b);
-	/*sorted_stack_a(stack_a, stack_b, size);*/
 }

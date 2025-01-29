@@ -13,11 +13,21 @@
 #include "main.h"
 #include <stdio.h>
 
+void	unset_operation(stack *stk)
+{
+	if (!stk)
+		return ;
+	while (stk)
+	{
+		stk->op = 0;
+		stk = stk->next;
+	}
+}
 void	print_stack(stack *stk)
 {
 	while (stk)
 	{
-		printf("(%d)-->", stk->data);
+		printf("(%d)[%d]-->", stk->data, stk->index);
 		stk = stk->next;
 	}
 	printf("\n");
@@ -128,5 +138,6 @@ int	main(int ac, char **av)
 	print_stack(stack_a);
 	if (stack_a)
 		sort_stack(&stack_a, &stack_b);
+	print_stack(stack_a);
 	return (0);
 }
