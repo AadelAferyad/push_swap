@@ -77,9 +77,9 @@ void	rotate_stack(stack **stk, char *str)
 	
 	tmp->prev = NULL;
 	*stk = tmp;
-	ft_puts(str);	
+	if (str)
+		ft_puts(str);	
 }
-
 
 void	reverse_rotate_stack(stack **stk, char *str)
 {
@@ -94,6 +94,7 @@ void	reverse_rotate_stack(stack **stk, char *str)
 	while (head->next)
 		head = head->next;
 
+
 	prev = head->prev;
 	prev->next = NULL;
 
@@ -102,7 +103,20 @@ void	reverse_rotate_stack(stack **stk, char *str)
 
 	(*stk)->prev = head;
 	*stk = head;
-	ft_puts(str);	
-
+	if (str)
+		ft_puts(str);
 }
 
+void	rotate_both_stack(stack **stack_a, stack **stack_b)
+{
+	rotate_stack(stack_a, NULL);
+	rotate_stack(stack_b, NULL);
+	ft_puts("rr\n");
+}
+
+void	reverse_rotate_both_stack(stack **stack_a, stack **stack_b)
+{
+	reverse_rotate_stack(stack_a, NULL);
+	reverse_rotate_stack(stack_b, NULL);
+	ft_puts("rrr\n");
+}

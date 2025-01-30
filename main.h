@@ -15,6 +15,7 @@
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "libft/libft.h"
 
 #define SA "sa\n"
@@ -54,8 +55,11 @@ void	find_head(stack **stk);
 void	push_stack(stack **stack_a, stack **stack_b, char *str);
 void	rotate_stack(stack **stk, char *str);
 void	reverse_rotate_stack(stack **stk, char *str);
+void	rotate_both_stack(stack **stack_a, stack **stack_b);
+
 int	stack_size(stack *stk);
 void	sort_stack(stack **stack_a, stack **stack_b);
 void	print_stack(stack *stk);
 void	unset_operation(stack *stk);
+void	reverse_rotate_both_stack(stack **stack_a, stack **stack_b);
 #endif 
