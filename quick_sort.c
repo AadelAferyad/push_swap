@@ -27,7 +27,7 @@ int	index_of_node(stack *stk, int index)
 		i++;
 		stk = stk->next;
 	}
-	return (i < (size / 2) ? i : (i * -1));
+	return (i <= (size / 2) ? i : (i * -1));
 }
 
 int	is_big_or_small(stack *stk, int index)
@@ -55,9 +55,93 @@ int	biggest_num(stack *stk)
 			tmp = stk;
 		stk = stk->next;
 	}
+	printf("this is the biggest num in stack_b (%d)[%d]\n", tmp->data, tmp->index);
 	return (index_of_node(head, tmp->index));
 }
 
+void	sort_array(int *arr, int size)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+/*
+ * 9 3 1 2 0 8
+ * 0 1 2 3 8 9
+ * */
+	i = 0;
+	while (i < size)
+	{
+		j = i + 1;
+		while (j < size)
+		{
+			if (arr[i] > arr[j])
+			{
+				tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int	closest_index(int *arr, int size, int index, stack *stk)
+{
+	int	i;
+	int	max;
+	int	low;
+
+	i = 0;
+	while (i < size)
+	{
+		if (arr[i] < index)
+		{
+			printf("arr[low] %d index : %d\n", low, index);
+			low = arr[i];
+		}
+		else if (arr[i] > index)
+		{
+			max = arr[i];
+		}
+		i++;
+	}
+	printf("low : %d max : %d\n", low, max);
+	if (index - low < max - index)
+		return (low);
+	printf("max \n");
+	return (max);
+}
+
+int	find_right_position(stack *stk, int index)
+{
+	int	i;
+	int	size;
+	int	*arr;
+	stack	*head;
+
+	size = stack_size(stk);
+	arr = ft_calloc(sizeof(int), size);
+	head = stk;
+	while (stk)
+	{
+		arr[i] = stk->index;
+		stk = stk->next;
+		i++;
+	}
+	sort_array(arr, size);
+	i = 0;
+	while (i < size)
+	{
+		printf("arr %d ", arr[i]);
+		i++;
+	}
+	printf("\n");
+	i = closest_index(arr, size, index, head);
+	free(arr);
+	return (i);
+}
 
 int	stack_b_operations(stack *stack_b, int index)
 {
@@ -68,15 +152,13 @@ int	stack_b_operations(stack *stack_b, int index)
 	i = is_big_or_small(stack_b, index);
 	head = stack_b;
 	if (i == 1 || !i)
-		return (biggest_num(stack_b));
-	while (stack_b)
 	{
-		if (stack_b->index < index)
-			i = stack_b->index;
-		stack_b = stack_b->next;
+		printf("FOUDN THE SMALLEST IN STACK B %d\n\n", index);
+		return (biggest_num(stack_b));
 	}
+	i = find_right_position(stack_b, index);
 	position = index_of_node(head, i);
-	/*printf("inside stack_b position : %d\n", position);*/
+	printf("the biggest one: %d index : %d position : %d\n", i, index, position);
 	return (position);
 }
 
@@ -155,11 +237,13 @@ void	adjust_push(stack **stack_a, stack **stack_b)
 	tmp = *stack_a;
 	while (!tmp->op)
 		tmp = tmp->next;
+	printf("%d %d\n", tmp->index, tmp->op);
+	printf("called \n");
 	op_a = index_of_node(*stack_a, tmp->index);
 	op_b = stack_b_operations(*stack_b, tmp->index);
-	printf("%d %d\n", tmp->index, tmp->op);
 	while (i < tmp->op - 1)
 	{
+		print_stack(*stack_b);
 		printf("op_a : %d op_b : %d\n",op_a, op_b);
 		if (op_a > 0 && op_b > 0)
 			rotate_both_stack(stack_a, stack_b);
@@ -172,26 +256,31 @@ void	adjust_push(stack **stack_a, stack **stack_b)
 		else if (op_b > 0)
 			rotate_stack(stack_b, RB);
 		else if (op_b < 0)
-			reverse_rotate_stack(stack_b, RB);
+			reverse_rotate_stack(stack_b, RRB);
 	   i++;
 	}
-	printf("here ?\n");
 	push_stack(stack_a, stack_b, PB);
 }
 void	sort_stack(stack **stack_a, stack **stack_b)
 {
 	int	size;
+	int	i;
 	stack	*head;
 
 	push_stack(stack_a, stack_b, PB);
 	push_stack(stack_a, stack_b, PB);
 	size = stack_size(*stack_a);
-	find_best_op(*stack_a, *stack_b);
 	head = *stack_a;
+	print_stack(*stack_a);
+	print_stack(*stack_b);
+	i = 0;
 	while (size > 3)
 	{
-		adjust_push(stack_a, stack_b);
+		print_stack(*stack_b);
 		find_best_op(*stack_a, *stack_b);
+		adjust_push(stack_a, stack_b);
+		i++;
 		size--;
 	}
+	print_stack(*stack_b);
 }
