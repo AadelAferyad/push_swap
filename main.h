@@ -41,14 +41,11 @@ typedef struct stack_list
 	int	data;
 	int	index;
 	int	op;
+	int	target;
 	struct stack_list	*prev;
 	struct stack_list	*next;
 } stack;
 
-typedef struct	all_operations
-{
-	int	op;
-} operations;
 
 void	swap_stack(stack **stk, char *str);
 void	find_head(stack **stk);
