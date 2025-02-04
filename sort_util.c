@@ -17,8 +17,8 @@ void	swap_stack(stack **stk, char *str)
 {
 	stack	*head;
 	stack	*tmp;
-	head = *stk;
 
+	head = *stk;
 /*
  * stk =  N<--(0)-->(1)-->N;
  * head = (0)
@@ -30,10 +30,8 @@ void	swap_stack(stack **stk, char *str)
 	if (!head || !head->next)
 		return ;
 	tmp = head->next;
-	head->next = head->next->next;
-	head->prev = tmp;
+	head->next = tmp->next;
 	tmp->next = head;
-	tmp->prev = NULL;
 	*stk = tmp;
 	ft_puts(str);
 }
@@ -41,43 +39,22 @@ void	swap_stack(stack **stk, char *str)
 void	push_stack(stack **stack_a, stack **stack_b, char *str)
 {
 	stack	*tmp;
-/*
- * a : N<--(99)-->(2)-->N
- * b : 
- * tmp = (99)
- * a = N<--(2)-->N
- * b : (99)-->N
- * */
+
 	if (!(*stack_a))
 		return ;
 	if (!(*stack_b))
 	{
 		tmp = *stack_a;
 		*stack_a = (*stack_a)->next;
-		(*stack_a)->prev = NULL;
 		*stack_b = tmp;
 		tmp->next = NULL;
 		ft_puts(str);
 		return ;
 	}
-/*
- * a : N<--(19)-->(2)-->N
- * b : N<--(99)-->N
- * tmp = (19)
- * a = N<--(2)-->N
- * tmp = N<--(19)-->(99)
- * b : (99)-->N
- * */
 	tmp = *stack_a;
-
 	*stack_a = (*stack_a)->next;
-	if (*stack_a)
-		(*stack_a)->prev = NULL;
-
 	tmp->next = *stack_b;
-	tmp->prev = NULL;
 
-	(*stack_b)->prev = tmp;
 	*stack_b = tmp;
 	ft_puts(str);
 }
@@ -87,28 +64,17 @@ void	rotate_stack(stack **stk, char *str)
 	stack	*tmp;
 	stack	*head;
 
-/*
- * stk : N<--(19)-->(2)-->(3)-->N
- * head = (19)
- * tmp = (2)
- * head = (3);
- * head->next = (3)-->19;
- * stk = 3<--(19)-->N
- * tmp : N<--(2)
- * stk = N<--(2)-->(3)-->(19)-->N
- * */
 	head = *stk;
-	tmp = (*stk)->next;
 	if (!head || !head->next)
 		return ;
+	tmp = (*stk)->next;
 	while (head->next)
 		head = head->next;
-
+	/*if (tmp == head)*/
+	/*	swap_stack(stk, str);*/
 	head->next = *stk;
-	(*stk)->prev = head;
 	(*stk)->next = NULL;
 	
-	tmp->prev = NULL;
 	*stk = tmp;
 	if (str)
 		ft_puts(str);	
@@ -118,33 +84,26 @@ void	reverse_rotate_stack(stack **stk, char *str)
 {
 	stack	*head;
 	stack	*tmp;
-	stack	*prev;
 
 	head = *stk;
 
 	if (!head || !head->next)
 		return ;
 	while (head->next)
+	{
+		if (!head->next->next)
+			tmp = head;
 		head = head->next;
-/*
- *stk =  N<--(0)-->(1)-->N;
- * prev = 1<--0-->N
- * head = N<--1-->0;
- * stk = 1<--0
- * stk = N<--1-->0
- * */
-	prev = head->prev;
-	prev->next = NULL;
+	}
+	/*printf("head : %d\n", head->data);*/
 
-	if (prev == *stk)
-		prev->prev = head;
-	head->prev = NULL;
 	head->next = *stk;
+	tmp->next = NULL;
 
-	(*stk)->prev = head;
 	*stk = head;
 	if (str)
 		ft_puts(str);
+	/*print_stack(*stk);*/
 }
 
 void	rotate_both_stack(stack **stack_a, stack **stack_b)

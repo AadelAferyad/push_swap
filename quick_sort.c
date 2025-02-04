@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:35:16 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/01/27 19:16:17 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:57:12 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,24 +116,32 @@ void	sort_array(int *arr, int size)
 	}
 }
 
-int	closest_index(int *arr, int size, int index, stack *stk)
+int	closest_index(int *arr, int size, int index, stack *stk, int big_or_small)
 {
 	int	i;
 	int	low;
 
 	i = 0;
-	low = 0;
-	while (i < size)
+	low = arr[i];
+	while (!big_or_small && i < size)
 	{
 		if (arr[i] < index)
 			low = arr[i];
 		i++;
 	}
-	/*printf("insed closest_index : %d | low : %d\n", low, index);*/
+	while (big_or_small && i < size)
+	{
+		if (arr[i] > index)
+		{
+			low = arr[i];
+			break ;
+		}
+		i++;
+	}
 	return (low);
 }
 
-int	find_right_position(stack *stk, int index)
+int	find_right_position(stack *stk, int index, int big_or_small)
 {
 	int	i;
 	int	size;
@@ -142,7 +150,9 @@ int	find_right_position(stack *stk, int index)
 
 	size = stack_size(stk);
 	i = 0;
-	arr = ft_calloc(sizeof(int), size + 1);
+	arr = malloc(sizeof(int) * (size + 1));
+	if (!arr)
+		exit(1);
 	head = stk;
 	while (stk)
 	{
@@ -158,7 +168,7 @@ int	find_right_position(stack *stk, int index)
 	/*	i++;*/
 	/*}*/
 	/*printf("\n");*/
-	i = closest_index(arr, size, index, head);
+	i = closest_index(arr, size, index, head, big_or_small);
 	free(arr);
 	return (i);
 }
@@ -176,7 +186,7 @@ int	stack_b_operations(stack *stack_b, int index)
 		/*printf("FOUDN THE SMALLEST IN STACK B %d\n\n", index);*/
 		return (biggest_num(stack_b));
 	}
-	i = find_right_position(stack_b, index);
+	i = find_right_position(stack_b, index, 0);
 	position = index_of_node(stack_b, i);
 	/*printf("the biggest one: %d index : %d position : %d\n", i, index, position);*/
 	return (position);
@@ -263,9 +273,6 @@ void	adjust_push(stack **stack_a, stack **stack_b)
 	op_b = stack_b_operations(*stack_b, tmp->index);
 	while (i < tmp->op - 1)
 	{
-		/*print_stack(*stack_b);*/
-		/*printf("op_a : %d op_b : %d | index %d, n ops : %d\n",op_a, op_b, tmp->index, tmp->op);*/
-		/*print_stack(*stack_a);*/
 		if (op_a > 0 && op_b > 0)
 		{
 			op_a--;
@@ -336,30 +343,103 @@ void	sort_three_node(stack **stack_a)
 	int	small;
 	int	big;
 
-	tmp = *stack_a;
+	/*printf("size of stack_a : %d\n", stack_size(*stack_a));*/
+	/*tmp = *stack_a;*/
 	small = small_index(*stack_a);
 	big = max_index(*stack_a);
 
-	if (big == tmp->next->index)
+	if (big == (*stack_a)->next->index)
 		swap_stack(stack_a, RA);
-	if (big == tmp->index)
+	if (big == (*stack_a)->index)
 		rotate_stack(stack_a, RA);
-	if (small == tmp->next->next->index)	
+	if (small == (*stack_a)->next->next->index)
 		reverse_rotate_stack(stack_a, RRA);
-	if (small == tmp->next->index)
+	if (small == (*stack_a)->next->index)
 		swap_stack(stack_a, SA);
+	/*print_stack(*stack_a);*/
+}
+void	push_to_target(stack **stack_a, stack **stack_b, int index)
+{
+	int	i;
+	int	moves;
+
+	i = 0;
+	moves = index > 0 ? index : index * -1;
+	/*printf("moves : %d rra or ra : %d\n", moves, index);*/
+	while (i < moves)
+	{
+		if (index > 0)
+			rotate_stack(stack_a, RA);
+		else if (index < 0)
+			reverse_rotate_stack(stack_a, RRA);
+		i++;
+	}
+	/*print_stack(*stack_a);*/
+	push_stack(stack_b, stack_a, PA);
+}
+
+int	is_sorted(stack *stk)
+{
+	int	i;
+	int	size;
+
+	i = 0;
+	size = stack_size(stk);
+	while (stk && i < size)
+	{
+		if (stk->index != i)
+			return (1);
+		stk = stk->next;
+		i++;
+	}
+	return (0);
 }
 
 void	push_b_to_a(stack **stack_a, stack **stack_b)
 {
 	stack	*head;
 	int	target;
+	int	moves;
 
 	sort_three_node(stack_a);
+	head = *stack_b;
 	while (*stack_b)
 	{
-		target = closest_index();
-
+		/*print_stack(*stack_a);	*/
+		target = find_right_position(*stack_a, (*stack_b)->index, 1);
+		/*printf("index : %d node : %d target %d ", (*stack_b)->index, (*stack_b)->data, target);*/
+		target = index_of_node(*stack_a, target);
+		/*printf("moves to get there : %d\n", target);*/
+		push_to_target(stack_a, stack_b, target);
+	}
+	/*print_stack(*stack_a);	*/
+	/*while (is_sorted(*stack_a))*/
+	/*{*/
+	/*	if ((*stack_a)->index > (*stack_a)->next->index)*/
+	/*		swap_stack(stack_a, SA);*/
+	/*	target = index_of_node(*stack_a, 0);*/
+	/*	moves = target > 0 ? target : target * -1;*/
+	/*	while (moves > 0)*/
+	/*	{*/
+	/*		if (target > 0)*/
+	/*			rotate_stack(stack_a, RA);*/
+	/*		else if (target < 0)*/
+	/*			reverse_rotate_stack(stack_a, RRA);*/
+	/*		moves--;*/
+	/*	}*/
+	/*}*/
+	while (is_sorted(*stack_a))
+	{
+		target = index_of_node(*stack_a, 0);
+		moves = target > 0 ? target : target * -1;
+		while (moves > 0)
+		{
+			if (target > 0)
+				rotate_stack(stack_a, RA);
+			else if (target < 0)
+				reverse_rotate_stack(stack_a, RRA);
+			moves--;
+		}
 	}
 }
 
@@ -390,6 +470,8 @@ void	sort_stack(stack **stack_a, stack **stack_b)
 		i++;
 		size--;
 	}
+	/*print_stack(*stack_b);*/
 	push_b_to_a(stack_a, stack_b);
-	print_stack(*stack_b);
+	/*print_stack(*stack_a);*/
+	/*print_stack(*stack_b);*/
 }

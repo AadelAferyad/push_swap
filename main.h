@@ -42,7 +42,6 @@ typedef struct stack_list
 	int	index;
 	int	op;
 	int	target;
-	struct stack_list	*prev;
 	struct stack_list	*next;
 } stack;
 
