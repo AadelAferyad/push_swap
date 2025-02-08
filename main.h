@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:50:21 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/01/26 18:53:13 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/07 23:24:39 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,12 @@ void	sort_stack(stack **stack_a, stack **stack_b);
 void	print_stack(stack *stk);
 void	unset_operation(stack *stk);
 void	reverse_rotate_both_stack(stack **stack_a, stack **stack_b);
+
+void	advance_split(char const *s, char c, stack **head);
+
+stack	*parser(int ac, char **av);
+void	ft_collector(stack **head);
+void	print_error_and_exit();
+
+stack	*add_node_at_end(stack **head, int data);
 #endif 

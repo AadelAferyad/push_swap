@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:02:42 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/04 16:30:10 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/07 23:25:04 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,12 @@ void	indexing_stack(stack *stk)
 	}
 }
 
-stack	*add_node_at_begining(stack **head, int data)
+stack	*add_node_at_end(stack **head, int data)
 {
 	stack	*node;
+	stack	*tmp;
 
+	tmp = *head;
 	node = malloc(sizeof(stack) * 1);
 	if (!node)
 		return (NULL);
@@ -89,36 +91,12 @@ stack	*add_node_at_begining(stack **head, int data)
 		*head = node;
 		return (node);
 	}
-	node->next = *head;
-	*head = node;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = node;
 	return (node);
 }
 
-stack	*create_stack(int ac, char **av)
-{
-	stack	*head;
-	stack	*temp;
-	int	i;
-
-	i = 1;
-	head = NULL;
-	while (i < ac)
-	{
-		temp = add_node_at_begining(&head, ft_atoi(av[i]));
-		if (!temp)
-		{
-			while (head)
-			{
-				temp = head->next;
-				free(head);
-				head = temp;
-			}
-			return (NULL);
-		}
-		i++;
-	}
-	return (head);
-}
 
 int	main(int ac, char **av)
 {
@@ -126,10 +104,11 @@ int	main(int ac, char **av)
 	stack	*stack_b;
 
 	stack_b = NULL;
-	stack_a = create_stack(ac, av);
+	stack_a = parser(ac, av);
 	indexing_stack(stack_a);
 	if (stack_a)
 		sort_stack(&stack_a, &stack_b);
 	print_stack(stack_a);
+	ft_collector(&stack_a);
 	return (0);
 }
