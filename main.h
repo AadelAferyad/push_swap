@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:50:21 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/07 23:24:39 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 00:31:49 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "libft/libft.h"
+
+#define MAX_INT 2147483647
+#define MIN_INT -2147483648
 
 #define SA "sa\n"
 #define SB "sb\n"
@@ -66,4 +69,22 @@ void	ft_collector(stack **head);
 void	print_error_and_exit();
 
 stack	*add_node_at_end(stack **head, int data);
+
+
+int	small_index(stack *stk);
+int	max_index(stack *stk);
+int	lowest_index(stack *stk);
+int	is_big(stack *stk, int index);
+int	is_small(stack *stk, int index);
+int	index_of_node(stack *stk, int index);
+int	is_big_or_small(stack *stk, int index);
+int	biggest_num(stack *stk);
+void	indexing_stack(stack *stk);
+
+int	find_right_position(stack *stk, int index, int big_or_small);
+int	stack_b_operations(stack *stack_b, int index);
+int	closest_operation(stack *stack_a, stack *stack_b, int index);
+void	set_operations(stack *stack_a, stack *stack_b);
+void	find_best_op(stack *stack_a, stack *stack_b);
+void	adjust_push(stack **stack_a, stack **stack_b);
 #endif 
