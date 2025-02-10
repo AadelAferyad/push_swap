@@ -6,40 +6,20 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 00:19:47 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 00:32:10 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:04:19 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int	find_right_position(stack *stk, int index, int big_or_small)
-{
-	stack	*head;
-	int		*arr;
-	int		i;
-	int		size;
-
-	head = stk;
-	i = MIN_INT;
-	if (big_or_small == 1)
-		i = MAX_INT;
-	while (big_or_small && head)
-	{
-		if (head->index > index && head->index < i)
-			i = head->index;
-		head = head->next;
-	}
-	head = stk;
-	while (!big_or_small && head)
-	{
-		if (head->index < index && i < head->index)
-			i = head->index;
-		head = head->next;
-	}
-	if (i == MAX_INT)
-		i = lowest_index(stk);
-	return (i);
-}
+/*
+ * stack_b_operations - finding the target in stack b
+ * 	which will be right to push the current index to it
+ * @stack_b: pointer to the stack b
+ * @index: current index we trying to calculate number of moves it need
+ * Return: return the biggest index on stack b if index is the new big index
+ * 	otherwise the target which is close to index
+ * */
 
 int	stack_b_operations(stack *stack_b, int index)
 {
@@ -56,32 +36,12 @@ int	stack_b_operations(stack *stack_b, int index)
 	return (position);
 }
 
-int	closest_operation(stack *stack_a, stack *stack_b, int index)
-{
-	int	op_a;
-	int	op_b;
-
-	op_a = index_of_node(stack_a, index);
-	op_b = stack_b_operations(stack_b, index);
-	if (op_b <= 0 && op_a <= 0)
-	{
-		op_b *= -1, op_a *= -1;
-		return (op_b > op_a ? op_b : op_a);
-	}
-	if (op_b >= 0 && op_a >= 0)
-		return (op_b > op_a ? op_b : op_a);
-	if ((op_b <= 0 && op_a >= 0) )
-	{
-		op_b *= -1;
-		return (op_b + op_a);
-	}
-	if ((op_b >= 0 && op_a <= 0))
-	{
-		op_a *= -1;
-		return (op_b + op_a);
-	}
-	return (op_b > op_a ? op_b : op_a);
-}
+/*
+ * set_operations - seting the number of operation each node need to be pushed
+ * 	to stack B
+ * @stack_a: pointer to the stack A
+ * @stack_b: pointer to the stack B
+ * */
 
 void	set_operations(stack *stack_a, stack *stack_b)
 {
@@ -95,11 +55,17 @@ void	set_operations(stack *stack_a, stack *stack_b)
 	}
 }
 
+/*
+ * find_best_op - searching for the cheapest operation
+ * @stack_a: pointer to the stack A
+ * @stack_b: pointer to the stack B
+ * */
+
 void	find_best_op(stack *stack_a, stack *stack_b)
 {
 	stack	*head;
 	stack	*tmp;
-	int	op;
+	int		op;
 
 	head = stack_a;
 	unset_operation(stack_a);
@@ -109,7 +75,7 @@ void	find_best_op(stack *stack_a, stack *stack_b)
 	{
 		if (head->op < tmp->op)
 			tmp = head;
-		head = head->next;	
+		head = head->next;
 	}
 	op = tmp->op;
 	unset_operation(stack_a);

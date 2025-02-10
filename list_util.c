@@ -6,18 +6,27 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:03:28 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 10:50:49 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:57:45 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-static stack	*ft_alloc(char const *s, int *start, int end, stack **head)
+/*
+ * ft_alloc - allocate node
+ * @s: pointer to the string
+ * start: pointer to int start of the word
+ * end: integer position of the end of the word
+ * @head: double pointer holde pointer to the stack
+ * Return: returns the created node otherwise NULL
+ * */
+
+static stack	*ft_alloc(char *s, int *start, int end, stack **head)
 {
 	char	*str;
-	int		len;
-	int	overflow;
 	stack	*node;
+	int		len;
+	int		overflow;
 
 	overflow = 0;
 	len = end - *start;
@@ -25,11 +34,17 @@ static stack	*ft_alloc(char const *s, int *start, int end, stack **head)
 	if (!str)
 		exit(1);
 	node = add_node_at_end(head, improved_atoi(str, &overflow));
-		
 	*start = -1;
 	free(str);
-	return (overflow == 1 ? NULL : node);
+	if (overflow == 1)
+		return (NULL);
+	return (node);
 }
+
+/*
+ * ft_collector - free all the node in the stack
+ * @head: double pointer holde pointer to the stack
+ * */
 
 void	ft_collector(stack **head)
 {
@@ -44,12 +59,19 @@ void	ft_collector(stack **head)
 	head = NULL;
 }
 
-static int	ft_split_healper(char const *s, char c, stack **head)
+/*
+ * ft_split_healper - fucntion helper seach for the start/end of substring
+ * @s: pointer to the string
+ * @c: the characted, string will be splitted by
+ * @head: double pointer holde pointer to the stack
+ * */
+
+static int	ft_split_healper(char *s, char c, stack **head)
 {
-	int	i;
-	int	j;
 	stack	*tmp;
-	int	start;
+	int		i;
+	int		j;
+	int		start;
 
 	i = 0;
 	j = -1;
@@ -70,9 +92,16 @@ static int	ft_split_healper(char const *s, char c, stack **head)
 	return (0);
 }
 
-void	advance_split(char const *s, char c, stack **head)
-{
+/*
+ * advance_split - split a sting with space and convert then to data
+ * 	for the stack
+ * @s: pointer to the string
+ * @c: the characted, string will be splitted by
+ * @head: double pointer holde pointer to the stack
+ * */
 
+void	advance_split(char *s, char c, stack **head)
+{
 	if (!s)
 		return ;
 	ft_split_healper(s, c, head);

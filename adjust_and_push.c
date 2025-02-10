@@ -6,62 +6,109 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 00:23:33 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 00:31:53 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:40:01 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
+/*
+ * locating_op - locating the cheapest move on stack a
+ * @s_b: stack b
+ * @s_a: stack a
+ * @op_a: pointer for number of op in stack a
+ * @op_b: pointer for number of op in stack b
+ * */
+
+static stack	*locating_op(stack *s_a, stack *s_b, int *op_a, int *op_b)
+{
+	stack	*tmp;
+
+	tmp = s_a;
+	while (!tmp->op)
+		tmp = tmp->next;
+	*op_a = index_of_node(s_a, tmp->index);
+	*op_b = stack_b_operations(s_b, tmp->index);
+	return (tmp);
+}
+
+/*
+ * adjust_helper - function helper rotatet or reverse rotate both stack
+ * @a: pointer for number of op in stack a
+ * @b: pointer for number of op in stack b
+ * @sb: stack b
+ * @sa: stack a
+ * */
+
+static void	adjust_helper(int *a, int *b, stack **sb, stack **sa)
+{
+	if (*a > 0 && *b > 0)
+	{
+		*a = *a - 1;
+		*b = *b - 1;
+		rotate_both_stack(sa, sb);
+	}
+	else if (*a < 0 && *b < 0)
+	{
+		*a = *a + 1;
+		*b = *b + 1;
+		reverse_rotate_both_stack(sa, sb);
+	}
+}
+
+/*
+ * adjust_helper_two - function helper rotatet or reverse rotate stack
+ * 	based on the flag
+ * @stk: double pointer hold pointer to the stack
+ * @op: pointer for number of op
+ * @flag: the flag variable it can be 1 or -1
+ * @str: message to pass to rotates functions
+ * */
+
+static void	adjust_helper_two(stack **stk, int *op, int flag, char *str)
+{
+	if (flag == -1)
+	{
+		rotate_stack(stk, str);
+		*op = *op - 1;
+	}
+	else if (flag == 1)
+	{
+		reverse_rotate_stack(stk, str);
+		*op = *op + 1;
+	}
+}
+
+/*
+ * adjust_push - pushing the cheapest move to stack b
+ * @stack_a: double pointer hold pointer to the stack A
+ * @stack_b: double pointer hold pointer to the stack b
+ * */
+
 void	adjust_push(stack **stack_a, stack **stack_b)
 {
 	stack	*tmp;
-	int	op_a;
-	int	op_b;
-	int	i;
+	int		op_a;
+	int		op_b;
+	int		i;
 
 	i = 0;
-	tmp = *stack_a;
-	while (!tmp->op)
-		tmp = tmp->next;
-	/*printf("%d %d\n", tmp->index, tmp->op);*/
-	/*printf("called \n");*/
-	op_a = index_of_node(*stack_a, tmp->index);
-	op_b = stack_b_operations(*stack_b, tmp->index);
+	tmp = locating_op(*stack_a, *stack_b, &op_a, &op_b);
 	while (i < tmp->op - 1)
 	{
 		if (op_a > 0 && op_b > 0)
-		{
-			op_a--;
-			op_b--;
-			rotate_both_stack(stack_a, stack_b);
-		}
+			adjust_helper(&op_a, &op_b, stack_b, stack_a);
 		else if (op_a < 0 && op_b < 0)
-		{
-			op_a++;
-			op_b++;
-			reverse_rotate_both_stack(stack_a, stack_b);
-		}
+			adjust_helper(&op_a, &op_b, stack_b, stack_a);
 		else if (op_a > 0)
-		{
-			rotate_stack(stack_a, RA);
-			op_a--;
-		}
+			adjust_helper_two(stack_a, &op_a, -1, RA);
 		else if (op_a < 0)
-		{
-			reverse_rotate_stack(stack_a, RRA);
-			op_a++;
-		}
+			adjust_helper_two(stack_a, &op_a, 1, RRA);
 		else if (op_b > 0)
-		{
-			op_b--;
-			rotate_stack(stack_b, RB);
-		}
+			adjust_helper_two(stack_b, &op_b, -1, RB);
 		else if (op_b < 0)
-		{
-			op_b++;
-			reverse_rotate_stack(stack_b, RRB);
-		}
-	   i++;
+			adjust_helper_two(stack_b, &op_b, 1, RRB);
+		i++;
 	}
 	push_stack(stack_a, stack_b, PB);
 }

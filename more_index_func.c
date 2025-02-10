@@ -6,11 +6,19 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 00:12:51 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 00:32:08 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:35:05 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+/*
+ * index_of_node - searching for the position of index in a stack
+ * @stk: pointer which hold address of the stack
+ * @index: current index we trying to search it's position
+ * Return: returns positive integer if position is less then stack size divided
+ * 	by 2 otherwise negative integer
+ * */
 
 int	index_of_node(stack *stk, int index)
 {
@@ -33,6 +41,15 @@ int	index_of_node(stack *stk, int index)
 	return (i);
 }
 
+/*
+ * is_big_or_small - checking if index is the new biggest index in the stack
+ * 	or if it's the new lowest
+ * @stk: pointer which hold address of the stack
+ * @index: index to check in the stack
+ * Return: returns 1 if true the index is the new lowest or the new biggest
+ * 	on the stack otherwise 2
+ * */
+
 int	is_big_or_small(stack *stk, int index)
 {
 	int	big;
@@ -49,11 +66,17 @@ int	is_big_or_small(stack *stk, int index)
 	return (2);
 }
 
+/*
+ * biggest_num - checking for the biggest index on the stack
+ * @stk: pointer which hold address of the stack
+ * Return: returns the position of the biggest index on the stack
+ * */
+
 int	biggest_num(stack *stk)
 {
 	stack	*tmp;
 	stack	*head;
-	int	max;
+	int		max;
 
 	tmp = stk;
 	head = stk;
@@ -67,12 +90,17 @@ int	biggest_num(stack *stk)
 	return (max);
 }
 
+/*
+ * indexing_stack - indexing the stack (proud of this function)
+ * @stk: pointer which hold address of the stack
+ * */
+
 void	indexing_stack(stack *stk)
 {
 	stack	*tmp;
 	stack	*head;
 	stack	*n;
-	int	index;
+	int		index;
 
 	index = 0;
 	head = stk;
@@ -92,6 +120,11 @@ void	indexing_stack(stack *stk)
 	}
 }
 
+/*
+ * stack_size - checking for the biggest index on the stack
+ * @stk: pointer which hold address of the stack
+ * Return: returns the position of the biggest index on the stack
+ * */
 int	stack_size(stack *stk)
 {
 	int	i;

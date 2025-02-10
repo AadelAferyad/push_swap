@@ -6,39 +6,21 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:02:42 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 11:23:48 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:34:09 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-#include <stdio.h>
 
-void	unset_operation(stack *stk)
-{
-	if (!stk)
-		return ;
-	while (stk)
-	{
-		stk->op = 0;
-		stk = stk->next;
-	}
-}
-
-void	print_stack(stack *stk)
-{
-	while (stk)
-	{
-		printf("[%d (%d)]--> ", stk->data, stk->index);
-		stk = stk->next;
-	}
-	printf("\n");
-}
-
+/*
+ * sort_two - sort two number on the stack if stack size is 2
+ * @stk: double pointer which holde pointer to the stack
+ * */
 
 static void	sort_two(stack **stk)
 {
-	int	size;
 	stack	*tmp;
+	int		size;
 
 	size = stack_size(*stk);
 	if (size == 1)
@@ -47,6 +29,14 @@ static void	sort_two(stack **stk)
 	if (tmp->index > tmp->next->index)
 		swap_stack(stk, SA);
 }
+/*
+ * main - Entry point
+ *
+ * @ac: the argument count.
+ * @av: the argument vector.
+ *
+ * Return: Always 0 (Success).
+ */
 
 int	main(int ac, char **av)
 {

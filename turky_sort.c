@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:35:16 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 11:55:06 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:02:40 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	sort_three_node(stack **stack_a)
 	int		small;
 	int		big;
 
-	small = small_index(*stack_a);
+	small = lowest_index(*stack_a);
 	big = max_index(*stack_a);
 	if (big == (*stack_a)->next->index)
 		swap_stack(stack_a, SA);

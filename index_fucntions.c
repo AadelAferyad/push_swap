@@ -6,26 +6,17 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 00:09:32 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 00:32:01 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:04:14 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int	small_index(stack *stk)
-{
-	int	i;
-
-	i = stk->index;
-	while (stk)
-	{
-		if (i > stk->index)
-			i = stk->index;
-		stk = stk->next;
-	}
-	return (i);
-}
-
+/*
+ * max_index - searching for the biggest index on the stack
+ * @stk: pointer to the stack
+ * Return: returns the biggest index
+ * */
 int	max_index(stack *stk)
 {
 	int	i;
@@ -39,6 +30,12 @@ int	max_index(stack *stk)
 	}
 	return (i);
 }
+
+/*
+ * lowest_index - searching for the lowest index on the stack
+ * @stk: pointer to the stack
+ * Return: returns the lowest index
+ * */
 
 int	lowest_index(stack *stk)
 {
@@ -54,6 +51,13 @@ int	lowest_index(stack *stk)
 	return (tmp);
 }
 
+/*
+ * is_big - check if the index is the biggest in stack
+ * @stk: pointer to the stack
+ * @index: current index
+ * Return: returns 0 if false otherwise 1
+ * */
+
 int	is_big(stack *stk, int index)
 {
 	while (stk)
@@ -64,6 +68,13 @@ int	is_big(stack *stk, int index)
 	}
 	return (1);
 }
+
+/*
+ * is_small - check if the index is the smallest in stack
+ * @stk: pointer to the stack
+ * @index: current index
+ * Return: returns 0 if false otherwise 1
+ * */
 
 int	is_small(stack *stk, int index)
 {
