@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:35:16 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 15:02:40 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:18:25 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
  * @stack_a: double pointer to head of stack
  * */
 
-static void	sort_three_node(stack **stack_a)
+static void	sort_three_node(t_stack **stack_a)
 {
-	stack	*tmp;
+	t_stack	*tmp;
 	int		small;
 	int		big;
 
@@ -44,7 +44,7 @@ static void	sort_three_node(stack **stack_a)
  * index: current index of the stack_b node
  * */
 
-static void	push_to_target(stack **stack_a, stack **stack_b, int index)
+static void	push_to_target(t_stack **stack_a, t_stack **stack_b, int index)
 {
 	int	i;
 	int	moves;
@@ -71,7 +71,7 @@ static void	push_to_target(stack **stack_a, stack **stack_b, int index)
  * Return: returns 0 if sorted otherwise 1
  * */
 
-static int	is_sorted(stack *stk)
+static int	is_sorted(t_stack *stk)
 {
 	int	i;
 
@@ -92,7 +92,7 @@ static int	is_sorted(stack *stk)
  * @stack_b: double pointer to head of stack B
  * */
 
-static void	push_b_to_a(stack **stack_a, stack **stack_b)
+static void	push_b_to_a(t_stack **stack_a, t_stack **stack_b)
 {
 	int	target;
 	int	moves;
@@ -127,9 +127,9 @@ static void	push_b_to_a(stack **stack_a, stack **stack_b)
  * @stack_b: double pointer to head of stack B
  * */
 
-void	sort_stack(stack **stack_a, stack **stack_b)
+void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 {
-	stack	*head;
+	t_stack	*head;
 	int		size;
 	int		i;
 

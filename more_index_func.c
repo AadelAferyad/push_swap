@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 00:12:51 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 14:35:05 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:14:19 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * 	by 2 otherwise negative integer
  * */
 
-int	index_of_node(stack *stk, int index)
+int	index_of_node(t_stack *stk, int index)
 {
 	int	i;
 	int	j;
@@ -50,7 +50,7 @@ int	index_of_node(stack *stk, int index)
  * 	on the stack otherwise 2
  * */
 
-int	is_big_or_small(stack *stk, int index)
+int	is_big_or_small(t_stack *stk, int index)
 {
 	int	big;
 	int	small;
@@ -72,10 +72,10 @@ int	is_big_or_small(stack *stk, int index)
  * Return: returns the position of the biggest index on the stack
  * */
 
-int	biggest_num(stack *stk)
+int	biggest_num(t_stack *stk)
 {
-	stack	*tmp;
-	stack	*head;
+	t_stack	*tmp;
+	t_stack	*head;
 	int		max;
 
 	tmp = stk;
@@ -95,11 +95,11 @@ int	biggest_num(stack *stk)
  * @stk: pointer which hold address of the stack
  * */
 
-void	indexing_stack(stack *stk)
+void	indexing_stack(t_stack *stk)
 {
-	stack	*tmp;
-	stack	*head;
-	stack	*n;
+	t_stack	*tmp;
+	t_stack	*head;
+	t_stack	*n;
 	int		index;
 
 	index = 0;
@@ -125,7 +125,7 @@ void	indexing_stack(stack *stk)
  * @stk: pointer which hold address of the stack
  * Return: returns the position of the biggest index on the stack
  * */
-int	stack_size(stack *stk)
+int	stack_size(t_stack *stk)
 {
 	int	i;
 

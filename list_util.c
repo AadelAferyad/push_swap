@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:03:28 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 14:57:45 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:13:17 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
  * Return: returns the created node otherwise NULL
  * */
 
-static stack	*ft_alloc(char *s, int *start, int end, stack **head)
+static t_stack	*ft_alloc(char *s, int *start, int end, t_stack **head)
 {
 	char	*str;
-	stack	*node;
+	t_stack	*node;
 	int		len;
 	int		overflow;
 
@@ -46,9 +46,9 @@ static stack	*ft_alloc(char *s, int *start, int end, stack **head)
  * @head: double pointer holde pointer to the stack
  * */
 
-void	ft_collector(stack **head)
+void	ft_collector(t_stack **head)
 {
-	stack	*tmp;
+	t_stack	*tmp;
 
 	while (*head)
 	{
@@ -66,9 +66,9 @@ void	ft_collector(stack **head)
  * @head: double pointer holde pointer to the stack
  * */
 
-static int	ft_split_healper(char *s, char c, stack **head)
+static int	ft_split_healper(char *s, char c, t_stack **head)
 {
-	stack	*tmp;
+	t_stack	*tmp;
 	int		i;
 	int		j;
 	int		start;
@@ -100,7 +100,7 @@ static int	ft_split_healper(char *s, char c, stack **head)
  * @head: double pointer holde pointer to the stack
  * */
 
-void	advance_split(char *s, char c, stack **head)
+void	advance_split(char *s, char c, t_stack **head)
 {
 	if (!s)
 		return ;

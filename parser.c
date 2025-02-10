@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:05:49 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 14:04:21 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:16:35 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ static int	checker_is_space(char *str)
  * @head: double pointer to the head of the stack
  * */
 
-static void	checker_is_dup(stack **head)
+static void	checker_is_dup(t_stack **head)
 {
-	stack	*tmp;
-	stack	*ptr;
+	t_stack	*tmp;
+	t_stack	*ptr;
 
 	ptr = *head;
 	while (ptr)
@@ -86,9 +86,9 @@ static void	checker_is_digit(char *str)
  * 	otherwise it print error and exit
  * */
 
-stack	*parser(int ac, char **av)
+t_stack	*parser(int ac, char **av)
 {
-	stack	*head;
+	t_stack	*head;
 	int		i;
 
 	head = NULL;

@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:45:01 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 14:32:31 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:14:50 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @stk: pointer to the stack
  * */
 
-void	unset_operation(stack *stk)
+void	unset_operation(t_stack *stk)
 {
 	if (!stk)
 		return ;
@@ -57,7 +57,7 @@ static int	closest_operation_helper(int op_a, int op_b, int flag)
  * Return: return op_b if it's greater then op_a otherwise op_a
  * */
 
-int	closest_operation(stack *stack_a, stack *stack_b, int index)
+int	closest_operation(t_stack *stack_a, t_stack *stack_b, int index)
 {
 	int	op_a;
 	int	op_b;
@@ -92,9 +92,9 @@ int	closest_operation(stack *stack_a, stack *stack_b, int index)
  * Return: returns the target index
  * */
 
-int	find_right_position(stack *stk, int index, int big_or_small)
+int	find_right_position(t_stack *stk, int index, int big_or_small)
 {
-	stack	*head;
+	t_stack	*head;
 	int		*arr;
 	int		i;
 	int		size;

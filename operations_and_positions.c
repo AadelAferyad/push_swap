@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 00:19:47 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 14:04:19 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:16:13 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
  * 	otherwise the target which is close to index
  * */
 
-int	stack_b_operations(stack *stack_b, int index)
+int	stack_b_operations(t_stack *stack_b, int index)
 {
-	stack	*head;
+	t_stack	*head;
 	int		position;
 	int		i;
 
@@ -43,9 +43,9 @@ int	stack_b_operations(stack *stack_b, int index)
  * @stack_b: pointer to the stack B
  * */
 
-void	set_operations(stack *stack_a, stack *stack_b)
+void	set_operations(t_stack *stack_a, t_stack *stack_b)
 {
-	stack	*head;
+	t_stack	*head;
 
 	head = stack_a;
 	while (stack_a)
@@ -61,10 +61,10 @@ void	set_operations(stack *stack_a, stack *stack_b)
  * @stack_b: pointer to the stack B
  * */
 
-void	find_best_op(stack *stack_a, stack *stack_b)
+void	find_best_op(t_stack *stack_a, t_stack *stack_b)
 {
-	stack	*head;
-	stack	*tmp;
+	t_stack	*head;
+	t_stack	*tmp;
 	int		op;
 
 	head = stack_a;

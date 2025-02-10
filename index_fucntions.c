@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 00:09:32 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 15:04:14 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:12:37 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @stk: pointer to the stack
  * Return: returns the biggest index
  * */
-int	max_index(stack *stk)
+int	max_index(t_stack *stk)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ int	max_index(stack *stk)
  * Return: returns the lowest index
  * */
 
-int	lowest_index(stack *stk)
+int	lowest_index(t_stack *stk)
 {
 	int	tmp;
 
@@ -58,7 +58,7 @@ int	lowest_index(stack *stk)
  * Return: returns 0 if false otherwise 1
  * */
 
-int	is_big(stack *stk, int index)
+int	is_big(t_stack *stk, int index)
 {
 	while (stk)
 	{
@@ -76,7 +76,7 @@ int	is_big(stack *stk, int index)
  * Return: returns 0 if false otherwise 1
  * */
 
-int	is_small(stack *stk, int index)
+int	is_small(t_stack *stk, int index)
 {
 	while (stk)
 	{

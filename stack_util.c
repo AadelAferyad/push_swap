@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 14:04:26 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:17:39 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
  * @str: pointer to the string that will be printed (SA or SB)
  * */
 
-void	swap_stack(stack **stk, char *str)
+void	swap_stack(t_stack **stk, char *str)
 {
-	stack	*head;
-	stack	*tmp;
+	t_stack	*head;
+	t_stack	*tmp;
 
 	head = *stk;
 	if (!head || !head->next)
@@ -42,9 +42,9 @@ void	swap_stack(stack **stk, char *str)
  * @str: pointer to the string that will be printed (PA or PB)
  * */
 
-void	push_stack(stack **stack_a, stack **stack_b, char *str)
+void	push_stack(t_stack **stack_a, t_stack **stack_b, char *str)
 {
-	stack	*tmp;
+	t_stack	*tmp;
 
 	if (!(*stack_a))
 		return ;
@@ -70,10 +70,10 @@ void	push_stack(stack **stack_a, stack **stack_b, char *str)
  * @str: pointer to the string that will be printed (RA or RB)
  * */
 
-void	rotate_stack(stack **stk, char *str)
+void	rotate_stack(t_stack **stk, char *str)
 {
-	stack	*tmp;
-	stack	*head;
+	t_stack	*tmp;
+	t_stack	*head;
 
 	head = *stk;
 	if (!head || !head->next)
@@ -94,10 +94,10 @@ void	rotate_stack(stack **stk, char *str)
  * @str: pointer to the string that will be printed (RRA or RRB)
  * */
 
-void	reverse_rotate_stack(stack **stk, char *str)
+void	reverse_rotate_stack(t_stack **stk, char *str)
 {
-	stack	*head;
-	stack	*tmp;
+	t_stack	*head;
+	t_stack	*tmp;
 
 	head = *stk;
 	if (!head || !head->next)

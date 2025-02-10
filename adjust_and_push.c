@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 00:23:33 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 15:40:01 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:12:02 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
  * @op_b: pointer for number of op in stack b
  * */
 
-static stack	*locating_op(stack *s_a, stack *s_b, int *op_a, int *op_b)
+static t_stack	*locating_op(t_stack *s_a, t_stack *s_b, int *op_a, int *op_b)
 {
-	stack	*tmp;
+	t_stack	*tmp;
 
 	tmp = s_a;
 	while (!tmp->op)
@@ -40,7 +40,7 @@ static stack	*locating_op(stack *s_a, stack *s_b, int *op_a, int *op_b)
  * @sa: stack a
  * */
 
-static void	adjust_helper(int *a, int *b, stack **sb, stack **sa)
+static void	adjust_helper(int *a, int *b, t_stack **sb, t_stack **sa)
 {
 	if (*a > 0 && *b > 0)
 	{
@@ -65,7 +65,7 @@ static void	adjust_helper(int *a, int *b, stack **sb, stack **sa)
  * @str: message to pass to rotates functions
  * */
 
-static void	adjust_helper_two(stack **stk, int *op, int flag, char *str)
+static void	adjust_helper_two(t_stack **stk, int *op, int flag, char *str)
 {
 	if (flag == -1)
 	{
@@ -85,9 +85,9 @@ static void	adjust_helper_two(stack **stk, int *op, int flag, char *str)
  * @stack_b: double pointer hold pointer to the stack b
  * */
 
-void	adjust_push(stack **stack_a, stack **stack_b)
+void	adjust_push(t_stack **stack_a, t_stack **stack_b)
 {
-	stack	*tmp;
+	t_stack	*tmp;
 	int		op_a;
 	int		op_b;
 	int		i;

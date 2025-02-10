@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 14:02:42 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 14:34:09 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:13:37 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
  * @stk: double pointer which holde pointer to the stack
  * */
 
-static void	sort_two(stack **stk)
+static void	sort_two(t_stack **stk)
 {
-	stack	*tmp;
+	t_stack	*tmp;
 	int		size;
 
 	size = stack_size(*stk);
@@ -40,8 +40,8 @@ static void	sort_two(stack **stk)
 
 int	main(int ac, char **av)
 {
-	stack	*stack_a;
-	stack	*stack_b;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 
 	stack_b = NULL;
 	stack_a = parser(ac, av);

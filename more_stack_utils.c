@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:23:04 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 15:33:41 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:15:35 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @stack_b: double pointer which hold address of the stack b
  * */
 
-void	rotate_both_stack(stack **stack_a, stack **stack_b)
+void	rotate_both_stack(t_stack **stack_a, t_stack **stack_b)
 {
 	rotate_stack(stack_a, NULL);
 	rotate_stack(stack_b, NULL);
@@ -32,7 +32,7 @@ void	rotate_both_stack(stack **stack_a, stack **stack_b)
  * @stack_b: double pointer which hold address of the stack b
  * */
 
-void	reverse_rotate_both_stack(stack **stack_a, stack **stack_b)
+void	reverse_rotate_both_stack(t_stack **stack_a, t_stack **stack_b)
 {
 	reverse_rotate_stack(stack_a, NULL);
 	reverse_rotate_stack(stack_b, NULL);
@@ -46,13 +46,13 @@ void	reverse_rotate_both_stack(stack **stack_a, stack **stack_b)
  * Return: returns the created node or NULL if failed
  * */
 
-stack	*add_node_at_end(stack **head, int data)
+t_stack	*add_node_at_end(t_stack **head, int data)
 {
-	stack	*node;
-	stack	*tmp;
+	t_stack	*node;
+	t_stack	*tmp;
 
 	tmp = *head;
-	node = malloc(sizeof(stack) * 1);
+	node = malloc(sizeof(t_stack) * 1);
 	if (!node)
 		return (NULL);
 	node->next = NULL;
