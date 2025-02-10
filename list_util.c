@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:03:28 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/07 23:24:41 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:50:49 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,19 @@ static stack	*ft_alloc(char const *s, int *start, int end, stack **head)
 {
 	char	*str;
 	int		len;
+	int	overflow;
 	stack	*node;
 
+	overflow = 0;
 	len = end - *start;
 	str = ft_substr(s, *start, len);
 	if (!str)
 		exit(1);
-	node = add_node_at_end(head, ft_atoi(str));
+	node = add_node_at_end(head, improved_atoi(str, &overflow));
+		
 	*start = -1;
 	free(str);
-	return (node);
+	return (overflow == 1 ? NULL : node);
 }
 
 void	ft_collector(stack **head)
@@ -61,10 +64,7 @@ static int	ft_split_healper(char const *s, char c, stack **head)
 		{
 			tmp = ft_alloc(s, &start, j + 1, head);
 			if (!tmp)
-			{
-				ft_collector(head);
-				print_error_and_exit();
-			}
+				print_error_free_exit(head);
 		}
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:50:21 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 00:31:49 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:48:18 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,7 @@ int	closest_operation(stack *stack_a, stack *stack_b, int index);
 void	set_operations(stack *stack_a, stack *stack_b);
 void	find_best_op(stack *stack_a, stack *stack_b);
 void	adjust_push(stack **stack_a, stack **stack_b);
+
+int	improved_atoi(char *nptr, int *overflow);
+void	print_error_free_exit(stack **stk);
 #endif 

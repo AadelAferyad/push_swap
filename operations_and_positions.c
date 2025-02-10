@@ -14,13 +14,15 @@
 
 int	find_right_position(stack *stk, int index, int big_or_small)
 {
-	int	*arr;
-	int	i;
-	int	size;
 	stack	*head;
+	int		*arr;
+	int		i;
+	int		size;
 
 	head = stk;
-	i = big_or_small == 1 ? MAX_INT: MIN_INT;
+	i = MIN_INT;
+	if (big_or_small == 1)
+		i = MAX_INT;
 	while (big_or_small && head)
 	{
 		if (head->index > index && head->index < i)
@@ -34,15 +36,16 @@ int	find_right_position(stack *stk, int index, int big_or_small)
 			i = head->index;
 		head = head->next;
 	}
-	i = i == MAX_INT ? lowest_index(stk) : i;
+	if (i == MAX_INT)
+		i = lowest_index(stk);
 	return (i);
 }
 
 int	stack_b_operations(stack *stack_b, int index)
 {
 	stack	*head;
-	int	position;
-	int	i;
+	int		position;
+	int		i;
 
 	i = is_big_or_small(stack_b, index);
 	head = stack_b;
@@ -62,8 +65,7 @@ int	closest_operation(stack *stack_a, stack *stack_b, int index)
 	op_b = stack_b_operations(stack_b, index);
 	if (op_b <= 0 && op_a <= 0)
 	{
-		op_b *= -1;
-		op_a *= -1;
+		op_b *= -1, op_a *= -1;
 		return (op_b > op_a ? op_b : op_a);
 	}
 	if (op_b >= 0 && op_a >= 0)
@@ -89,7 +91,6 @@ void	set_operations(stack *stack_a, stack *stack_b)
 	while (stack_a)
 	{
 		stack_a->op = closest_operation(head, stack_b, stack_a->index) + 1;
-		/*printf("| node: %d [%d] op : %d\n\n", stack_a->data, stack_a->index, stack_a->op);*/
 		stack_a = stack_a->next;
 	}
 }
@@ -113,5 +114,4 @@ void	find_best_op(stack *stack_a, stack *stack_b)
 	op = tmp->op;
 	unset_operation(stack_a);
 	tmp->op = op;
-	/*printf("node : %d [%d] n op : %d \n\n", tmp->data, tmp->index, tmp->op);*/
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   improved_atoi.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 01:20:20 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 11:16:17 by aaferyad         ###   ########.fr       */
+/*   Created: 2025/02/10 10:37:08 by aaferyad          #+#    #+#             */
+/*   Updated: 2025/02/10 10:48:40 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "main.h"
 
 static int	ft_check_escape(char *s, char c)
 {
@@ -26,9 +26,9 @@ static int	ft_check_escape(char *s, char c)
 	return (1);
 }
 
-int	ft_atoi(const char *nptr)
+int	improved_atoi(char *nptr, int *overflow)
 {
-	int	n;
+	long	n;
 	int	sign;
 	int	i;
 
@@ -48,5 +48,8 @@ int	ft_atoi(const char *nptr)
 		n = (nptr[i] - '0') + n * 10;
 		i++;
 	}
-	return (n * sign);
+	n = n * sign;
+	if (n > MAX_INT || n < MIN_INT)
+		*overflow = 1;
+	return ((int)(n));
 }

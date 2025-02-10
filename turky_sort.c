@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quick_sort.c                                       :+:      :+:    :+:   */
+/*   turky_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:35:16 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 09:34:54 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:55:06 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-#include <stdio.h>
 
-
+/*
+ * sort_three_node - sort three node in ascending order
+ * @stack_a: double pointer to head of stack
+ * */
 
 static void	sort_three_node(stack **stack_a)
 {
 	stack	*tmp;
-	int	small;
-	int	big;
+	int		small;
+	int		big;
 
 	small = small_index(*stack_a);
 	big = max_index(*stack_a);
-
 	if (big == (*stack_a)->next->index)
 		swap_stack(stack_a, SA);
 	if (big == (*stack_a)->index)
@@ -34,13 +35,25 @@ static void	sort_three_node(stack **stack_a)
 		swap_stack(stack_a, SA);
 }
 
+/*
+ * push_to_target - rotates or reverse rotate stack A
+ *	till the target is on the top of the stack B 
+ * 	then push the node from stack B to it
+ * @stack_a: double pointer to head of stack A
+ * @stack_b: double pointer to head of stack B
+ * index: current index of the stack_b node
+ * */
+
 static void	push_to_target(stack **stack_a, stack **stack_b, int index)
 {
 	int	i;
 	int	moves;
 
 	i = 0;
-	moves = index > 0 ? index : index * -1;
+	if (index > 0)
+		moves = index;
+	else
+		moves = index * -1;
 	while (i < moves)
 	{
 		if (index > 0)
@@ -52,24 +65,32 @@ static void	push_to_target(stack **stack_a, stack **stack_b, int index)
 	push_stack(stack_b, stack_a, PA);
 }
 
+/*
+ * is_sorted - check if the stack is sorted in ascending order
+ * @stk: double pointer to head of stack
+ * Return: returns 0 if sorted otherwise 1
+ * */
+
 static int	is_sorted(stack *stk)
 {
 	int	i;
-	int	tmp;
-	int	size;
 
 	i = 0;
-	size = stack_size(stk);
 	while (stk)
 	{
-		if (i && tmp > stk->data)
+		if (stk->index != i)
 			return (1);
-		tmp = stk->data;
 		stk = stk->next;
 		i++;
 	}
 	return (0);
 }
+
+/*
+ * push_b_to_a - push all the node from stack b to the stack a and sorted
+ * @stack_a: double pointer to head of stack A
+ * @stack_b: double pointer to head of stack B
+ * */
 
 static void	push_b_to_a(stack **stack_a, stack **stack_b)
 {
@@ -86,7 +107,9 @@ static void	push_b_to_a(stack **stack_a, stack **stack_b)
 	while (is_sorted(*stack_a))
 	{
 		target = index_of_node(*stack_a, 0);
-		moves = target > 0 ? target : target * -1;
+		moves = target;
+		if (target < 0)
+			moves = target * -1;
 		while (moves > 0)
 		{
 			if (target > 0)
@@ -98,11 +121,17 @@ static void	push_b_to_a(stack **stack_a, stack **stack_b)
 	}
 }
 
+/*
+ * sort_stack - sort stack A
+ * @stack_a: double pointer to head of stack A
+ * @stack_b: double pointer to head of stack B
+ * */
+
 void	sort_stack(stack **stack_a, stack **stack_b)
 {
-	int	size;
-	int	i;
 	stack	*head;
+	int		size;
+	int		i;
 
 	size = stack_size(*stack_a);
 	i = 0;
@@ -117,7 +146,6 @@ void	sort_stack(stack **stack_a, stack **stack_b)
 	head = *stack_a;
 	while (size > 3)
 	{
-		/*print_stack(*stack_b);*/
 		find_best_op(*stack_a, *stack_b);
 		adjust_push(stack_a, stack_b);
 		i++;

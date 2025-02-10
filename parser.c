@@ -6,18 +6,19 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:05:49 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/07 23:40:59 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:55:03 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	print_error_and_exit()
-{
-	ft_putstr_fd("Error\n", 2);
-	exit(1);
-}
-int	checker_is_space(char *str)
+/*
+ * checker_is_space - cheking if the string contain a space
+ * @str: pointer to str that will be checked
+ * Return: returns 1 if space found otherwise 0
+ * */
+
+static int	checker_is_space(char *str)
 {
 	int	i;
 
@@ -31,25 +32,38 @@ int	checker_is_space(char *str)
 	return (0);
 }
 
-void	checker_is_dup(stack *head)
+/*
+ * checker_is_dup - check if the numbers are duplicated
+ * 	if duplicated it frees the stack and print error and exits
+ * @head: double pointer to the head of the stack
+ * */
+
+static void	checker_is_dup(stack **head)
 {
 	stack	*tmp;
+	stack	*ptr;
 
-	while (head)
+	ptr = *head;
+	while (ptr)
 	{
-		tmp = head->next;
+		tmp = ptr->next;
 		while (tmp)
 		{
-			if (tmp->data == head->data)
-				print_error_and_exit();
+			if (tmp->data == ptr->data)
+				print_error_free_exit(head);
 			tmp = tmp->next;
 		}
-		head = head->next;
+		ptr = ptr->next;
 	}
-
 }
 
-void	checker_is_digit(char *str)
+/*
+ * checker_is_digit - check if argument is digit if not 
+ * 	it print error and exits 
+ * @str: pointer to string with contain argumets or at least one
+ * */
+
+static void	checker_is_digit(char *str)
 {
 	int	i;
 
@@ -64,10 +78,18 @@ void	checker_is_digit(char *str)
 	}
 }
 
+/*
+ * parser - parse the argumets passed by argv and check them
+ * @ac: argument count number of argument passed to the programe
+ * @av: argument vector it contains pointer to char holding arguments
+ * Return: if arguments are valid it create stack and returns it
+ * 	otherwise it print error and exit
+ * */
+
 stack	*parser(int ac, char **av)
 {
-	int	i;
 	stack	*head;
+	int		i;
 
 	head = NULL;
 	i = 1;
@@ -81,10 +103,9 @@ stack	*parser(int ac, char **av)
 	i = 1;
 	while (i < ac)
 	{
-		advance_split(av[i], ' ' , &head);
+		advance_split(av[i], ' ', &head);
 		i++;
 	}
-	checker_is_dup(head);
+	checker_is_dup(&head);
 	return (head);
 }
-
