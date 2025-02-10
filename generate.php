@@ -31,7 +31,8 @@
 		$num = rand();
 		if (!deja_vue($arr, $num))
 		{
-			$arr[$j] = $num;
+			$b = ((int)$num) * -1;
+			$arr[$j] = $b;
 			$j++;
 			echo ($num. " ");
 		}

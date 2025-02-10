@@ -69,6 +69,7 @@ int			index_of_node(t_stack *stk, int index);
 int			is_big_or_small(t_stack *stk, int index);
 int			biggest_num(t_stack *stk);
 void		indexing_stack(t_stack *stk);
+void		checker_is_dup(t_stack **head);
 int			find_right_position(t_stack *stk, int index, int big_or_small);
 int			stack_b_operations(t_stack *stack_b, int index);
 int			closest_operation(t_stack *stack_a, t_stack *stack_b, int index);

@@ -38,7 +38,7 @@ static int	checker_is_space(char *str)
  * @head: double pointer to the head of the stack
  * */
 
-static void	checker_is_dup(t_stack **head)
+void	checker_is_dup(t_stack **head)
 {
 	t_stack	*tmp;
 	t_stack	*ptr;
@@ -108,6 +108,5 @@ t_stack	*parser(int ac, char **av)
 		advance_split(av[i], ' ', &head);
 		i++;
 	}
-	checker_is_dup(&head);
 	return (head);
 }

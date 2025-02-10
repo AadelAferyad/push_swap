@@ -87,6 +87,7 @@ static int	ft_split_healper(char *s, char c, t_stack **head)
 			tmp = ft_alloc(s, &start, j + 1, head);
 			if (!tmp)
 				print_error_free_exit(head);
+			checker_is_dup(head);
 		}
 	}
 	return (0);
