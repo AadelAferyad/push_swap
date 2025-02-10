@@ -68,6 +68,8 @@ static void	checker_is_digit(char *str)
 	int	i;
 
 	i = 0;
+	if (!str || *str == '\0')
+		exit(0);
 	while (str[i])
 	{
 		if (str[i] == '-' && !ft_isdigit(str[i + 1]))

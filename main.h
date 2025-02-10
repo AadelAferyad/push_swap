@@ -72,6 +72,7 @@ void		indexing_stack(t_stack *stk);
 int			find_right_position(t_stack *stk, int index, int big_or_small);
 int			stack_b_operations(t_stack *stack_b, int index);
 int			closest_operation(t_stack *stack_a, t_stack *stack_b, int index);
+int			is_sorted(t_stack *stk);
 void		set_operations(t_stack *stack_a, t_stack *stack_b);
 void		find_best_op(t_stack *stack_a, t_stack *stack_b);
 void		adjust_push(t_stack **stack_a, t_stack **stack_b);

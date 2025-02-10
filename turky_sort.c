@@ -71,7 +71,7 @@ static void	push_to_target(t_stack **stack_a, t_stack **stack_b, int index)
  * Return: returns 0 if sorted otherwise 1
  * */
 
-static int	is_sorted(t_stack *stk)
+int	is_sorted(t_stack *stk)
 {
 	int	i;
 

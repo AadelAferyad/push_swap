@@ -46,6 +46,11 @@ int	main(int ac, char **av)
 	stack_b = NULL;
 	stack_a = parser(ac, av);
 	indexing_stack(stack_a);
+	if (!is_sorted(stack_a))
+	{
+		ft_collector(&stack_a);
+		return (0);
+	}
 	if (stack_size(stack_a) < 3)
 		sort_two(&stack_a);
 	else
