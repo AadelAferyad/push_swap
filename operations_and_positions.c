@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 00:19:47 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 16:16:13 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:06:33 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@
 
 int	stack_b_operations(t_stack *stack_b, int index)
 {
-	t_stack	*head;
 	int		position;
 	int		i;
 
 	i = is_big_or_small(stack_b, index);
-	head = stack_b;
 	if (i == 1)
 		return (biggest_num(stack_b));
 	i = find_right_position(stack_b, index, 0);

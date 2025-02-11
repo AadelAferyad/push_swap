@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:35:16 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 16:18:25 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:04:20 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 static void	sort_three_node(t_stack **stack_a)
 {
-	t_stack	*tmp;
 	int		small;
 	int		big;
 
@@ -129,7 +128,6 @@ static void	push_b_to_a(t_stack **stack_a, t_stack **stack_b)
 
 void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack	*head;
 	int		size;
 	int		i;
 
@@ -143,7 +141,6 @@ void	sort_stack(t_stack **stack_a, t_stack **stack_b)
 		i++;
 		size--;
 	}
-	head = *stack_a;
 	while (size > 3)
 	{
 		find_best_op(*stack_a, *stack_b);

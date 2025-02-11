@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:50:21 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 16:10:40 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:45:59 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ void		find_head(t_stack **stk);
 void		push_stack(t_stack **stack_a, t_stack **stack_b, char *str);
 void		rotate_stack(t_stack **stk, char *str);
 void		reverse_rotate_stack(t_stack **stk, char *str);
-void		rotate_both_stack(t_stack **stack_a, t_stack **stack_b);
+void		rotate_both_stack(t_stack **stack_a, t_stack **stack_b, char *str);
 int			stack_size(t_stack *stk);
 void		sort_stack(t_stack **stack_a, t_stack **stack_b);
 void		print_stack(t_stack *stk);
 void		unset_operation(t_stack *stk);
-void		reverse_rotate_both_stack(t_stack **stack_a, t_stack **stack_b);
+void		reverse_rotate_both_stack(t_stack **a, t_stack **b, char *str);
 void		advance_split(char *s, char c, t_stack **head);
 t_stack		*parser(int ac, char **av);
 void		ft_collector(t_stack **head);
@@ -79,5 +79,6 @@ void		find_best_op(t_stack *stack_a, t_stack *stack_b);
 void		adjust_push(t_stack **stack_a, t_stack **stack_b);
 int			improved_atoi(char *nptr, int *overflow);
 void		print_error_free_exit(t_stack **stk);
+void		swap_both_stack(t_stack **stack_a, t_stack **stack_b, char *str);
 
 #endif 

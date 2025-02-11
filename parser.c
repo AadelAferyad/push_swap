@@ -6,31 +6,11 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:05:49 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 16:16:35 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:06:17 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-/*
- * checker_is_space - cheking if the string contain a space
- * @str: pointer to str that will be checked
- * Return: returns 1 if space found otherwise 0
- * */
-
-static int	checker_is_space(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == ' ')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 /*
  * checker_is_dup - check if the numbers are duplicated
@@ -69,9 +49,11 @@ static void	checker_is_digit(char *str)
 
 	i = 0;
 	if (!str || *str == '\0')
-		exit(0);
+		print_error_and_exit();
 	while (str[i])
 	{
+		if (str[i] == '-' && i && str[i - 1] != ' ')
+			print_error_and_exit();
 		if (str[i] == '-' && !ft_isdigit(str[i + 1]))
 			print_error_and_exit();
 		else if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '-')

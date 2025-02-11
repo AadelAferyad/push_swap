@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:22:29 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 16:17:39 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:17:55 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,22 @@ void	swap_stack(t_stack **stk, char *str)
 	head->next = tmp->next;
 	tmp->next = head;
 	*stk = tmp;
-	ft_puts(str);
+	if (str)
+		ft_puts(str);
+}
+
+/*
+ * swap_both_stack - swap both stacks a and b
+ * @stack_a: double pointer which hold address of the stack a
+ * @stack_b: double pointer which hold address of the stack b
+ * */
+
+void	swap_both_stack(t_stack **stack_a, t_stack **stack_b, char *str)
+{
+	swap_stack(stack_a, NULL);
+	swap_stack(stack_b, NULL);
+	if (str)
+		ft_puts("ss\n");
 }
 
 /*
@@ -54,14 +69,16 @@ void	push_stack(t_stack **stack_a, t_stack **stack_b, char *str)
 		*stack_a = (*stack_a)->next;
 		*stack_b = tmp;
 		tmp->next = NULL;
-		ft_puts(str);
+		if (str)
+			ft_puts(str);
 		return ;
 	}
 	tmp = *stack_a;
 	*stack_a = (*stack_a)->next;
 	tmp->next = *stack_b;
 	*stack_b = tmp;
-	ft_puts(str);
+	if (str)
+		ft_puts(str);
 }
 
 /*

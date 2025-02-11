@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 00:23:33 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 16:12:02 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:23:03 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ static void	adjust_helper(int *a, int *b, t_stack **sb, t_stack **sa)
 	{
 		*a = *a - 1;
 		*b = *b - 1;
-		rotate_both_stack(sa, sb);
+		rotate_both_stack(sa, sb, RR);
 	}
 	else if (*a < 0 && *b < 0)
 	{
 		*a = *a + 1;
 		*b = *b + 1;
-		reverse_rotate_both_stack(sa, sb);
+		reverse_rotate_both_stack(sa, sb, RRR);
 	}
 }
 

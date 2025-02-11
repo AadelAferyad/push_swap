@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:45:01 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 16:14:50 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:07:12 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ int	closest_operation(t_stack *stack_a, t_stack *stack_b, int index)
 int	find_right_position(t_stack *stk, int index, int big_or_small)
 {
 	t_stack	*head;
-	int		*arr;
 	int		i;
-	int		size;
 
 	head = stk;
 	i = MIN_INT;

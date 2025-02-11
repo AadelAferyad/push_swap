@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:23:04 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 16:15:35 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:46:46 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
  * @stack_b: double pointer which hold address of the stack b
  * */
 
-void	rotate_both_stack(t_stack **stack_a, t_stack **stack_b)
+void	rotate_both_stack(t_stack **stack_a, t_stack **stack_b, char *str)
 {
 	rotate_stack(stack_a, NULL);
 	rotate_stack(stack_b, NULL);
-	ft_puts("rr\n");
+	if (str)
+		ft_puts("rr\n");
 }
 
 /*
@@ -32,11 +33,12 @@ void	rotate_both_stack(t_stack **stack_a, t_stack **stack_b)
  * @stack_b: double pointer which hold address of the stack b
  * */
 
-void	reverse_rotate_both_stack(t_stack **stack_a, t_stack **stack_b)
+void	reverse_rotate_both_stack(t_stack **a, t_stack **b, char *str)
 {
-	reverse_rotate_stack(stack_a, NULL);
-	reverse_rotate_stack(stack_b, NULL);
-	ft_puts("rrr\n");
+	reverse_rotate_stack(a, NULL);
+	reverse_rotate_stack(b, NULL);
+	if (str)
+		ft_puts("rrr\n");
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:03:28 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/10 16:13:17 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:07:40 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,9 @@ void	ft_collector(t_stack **head)
 static int	ft_split_healper(char *s, char c, t_stack **head)
 {
 	t_stack	*tmp;
-	int		i;
 	int		j;
 	int		start;
 
-	i = 0;
 	j = -1;
 	start = -1;
 	while (s[++j])
