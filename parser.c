@@ -46,6 +46,7 @@ void	checker_is_dup(t_stack **head)
 static void	checker_is_digit(char *str)
 {
 	int	i;
+	int	flag;
 
 	i = 0;
 	if (!str || *str == '\0')
