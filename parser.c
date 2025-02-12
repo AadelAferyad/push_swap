@@ -49,10 +49,13 @@ static void	checker_is_digit(char *str)
 	int	flag;
 
 	i = 0;
+	flag = 0;
 	if (!str || *str == '\0')
 		print_error_and_exit();
 	while (str[i])
 	{
+		if (str[i] != ' ' && str[i] != '\n')
+			flag = 1;
 		if (str[i] == '-' && i && str[i - 1] != ' ')
 			print_error_and_exit();
 		if (str[i] == '-' && !ft_isdigit(str[i + 1]))
@@ -61,6 +64,8 @@ static void	checker_is_digit(char *str)
 			print_error_and_exit();
 		i++;
 	}
+	if (!flag)
+		print_error_and_exit();
 }
 
 /*
