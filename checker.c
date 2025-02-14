@@ -6,7 +6,7 @@
 /*   By: aaferyad <aaferyad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 11:41:15 by aaferyad          #+#    #+#             */
-/*   Updated: 2025/02/11 17:43:21 by aaferyad         ###   ########.fr       */
+/*   Updated: 2025/02/14 23:29:42 by aaferyad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,6 @@ void	free_grid(char **grid)
 	}
 	free(grid);
 	grid = NULL;
-}
-
-int	check_str(char *str)
-{
-	int	i;
-	int	flag;
-
-	i = 0;
-	flag = 0;
-	if (*str != '\0' && (*str == '\n' && str[1] == '\0'))
-	{
-		free(str);
-		return (1);
-	}
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			flag++;
-		if (str[i] != '\n' && flag)
-			flag = 0;
-		if (flag > 1)
-		{
-			free(str);
-			return (1);
-		}
-		i++;
-	}
-	return (0);
 }
 
 static void	execute(t_stack **stack_a, t_stack **stack_b, char *str)
@@ -88,26 +60,38 @@ void	print_results(t_stack *stack_a, t_stack *stack_b)
 		ft_puts("KO\n");
 }
 
-int	main(int ac, char **av)
+char	*read_inputs(t_stack **stack_a)
 {
 	char	*sub_buffer;
 	char	*buffer;
-	t_stack	*stack_a;
-	t_stack	*stack_b;
 
-	stack_b = NULL;
 	buffer = NULL;
-	stack_a = parser(ac, av);
-	indexing_stack(stack_a);
 	sub_buffer = get_next_line(0);
 	while (sub_buffer)
 	{
+		if (sub_buffer && is_op_valid(sub_buffer) == -1)
+		{
+			free(sub_buffer);
+			free(buffer);
+			print_error_free_exit(stack_a);
+		}
 		buffer = ft_strjoin_gnl(buffer, sub_buffer);
 		free(sub_buffer);
 		sub_buffer = get_next_line(0);
 	}
-	if (sub_buffer)
-		free(sub_buffer);
+	return (buffer);
+}
+
+int	main(int ac, char **av)
+{
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+	char	*buffer;
+
+	stack_b = NULL;
+	stack_a = parser(ac, av);
+	indexing_stack(stack_a);
+	buffer = read_inputs(&stack_a);
 	if (buffer)
 		execute(&stack_a, &stack_b, buffer);
 	print_results(stack_a, stack_b);

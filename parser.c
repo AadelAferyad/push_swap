@@ -56,11 +56,14 @@ static void	checker_is_digit(char *str)
 	{
 		if (str[i] != ' ' && str[i] != '\n')
 			flag = 1;
-		if (str[i] == '-' && i && str[i - 1] != ' ')
+		if ((str[i] == '-' && i && str[i - 1] != ' ')
+			|| (str[i] == '+' && i && str[i - 1] != ' '))
 			print_error_and_exit();
-		if (str[i] == '-' && !ft_isdigit(str[i + 1]))
+		if ((str[i] == '-' && !ft_isdigit(str[i + 1]))
+			|| (str[i] == '+' && !ft_isdigit(str[i + 1])))
 			print_error_and_exit();
-		else if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '-')
+		else if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '-'
+			&& str[i] != '+')
 			print_error_and_exit();
 		i++;
 	}
